@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt # import matplotlib.pyplot as plt
 import seaborn as sn
 import pickle
 import shap
@@ -205,7 +205,7 @@ if st.checkbox("Enable (Disable) customer summary"):
    # Income distribution plot
    data_income = load_income_population(data)
    fig, ax = plt.subplots(figsize=(10, 5))
-   sn.histplot(data_income["AMT_INCOME_TOTAL"], edgecolor = 'g', color="darkorange", bins=10)
+   sn.histplot(data_income["AMT_INCOME_TOTAL"], edgecolor = 'g', color="orange", bins=10)
    ax.axvline(int(infos_client["AMT_INCOME_TOTAL"].values[0]), color="green", linestyle='--')
    ax.set(title='Customer income', xlabel='Income ($US)', ylabel='')
    st.pyplot(fig)
@@ -283,26 +283,5 @@ else:
 
 # <-- if __name__ == '__main__':
     #main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
