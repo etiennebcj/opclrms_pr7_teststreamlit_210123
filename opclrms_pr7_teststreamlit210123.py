@@ -197,7 +197,7 @@ else:
 
 
 # Customer solvability display
-st.header("Customer report")
+st.subheader("Customer report")
 prediction = load_prediction(sample, chk_id, clf)
 st.write("Default probability : {:.0f} %".format(round(float(prediction)*100, 2)))
 
@@ -218,7 +218,7 @@ if st.checkbox("Show (Hide) customer #{:.0f} feature importance".format(chk_id))
    shap.summary_plot(shap_values[0], X, plot_type ="bar", max_display=number, color_bar=False, plot_size=(5, 5))
    st.pyplot(fig)
         
-   if st.checkbox("Select feature for desciption") :
+   if st.checkbox("Select feature for desciption (show/hide)") :
       list_features = description.index.to_list()
       feature = st.selectbox('Feature checklist', list_features)
       st.table(description.loc[description.index == feature][:1])
