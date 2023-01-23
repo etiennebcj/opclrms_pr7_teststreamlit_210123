@@ -10,15 +10,10 @@ from zipfile import ZipFile
 plt.style.use('fivethirtyeight')
 
 
-# st.title('Credit Allocation Application')
-
-
-# <-- def main() :
-
 @st.cache
 def load_data():
 	
-    z = ZipFile('train_sample_30mskoriginal.zip') # OK size data < 200 MB
+    z = ZipFile('train_sample_30mskoriginal.zip') 
     data = pd.read_csv(z.open('train_sample_30mskoriginal.csv'), index_col='SK_ID_CURR', encoding ='utf-8') # data = pd.read_csv(z.open('X_data_rfecv_32.csv'), index_col='SK_ID_CURR', encoding ='utf-8')
     data = data.drop('Unnamed: 0', axis=1)
     z = ZipFile('train_sample_30m.zip')
@@ -31,8 +26,7 @@ def load_data():
     
     return data, sample, target, description
 
-# data = load_data() # --> for displaying purpose
-# st.subheader('data')
+# data = load_data() # --> for displaying purpose --> Not to be done if data is heavy, OK if size data < 200 MB
 # st.write(data)
 
 
@@ -159,18 +153,6 @@ plt.pie(targets, explode=[0, 0.5], labels=['Reimbursed', 'Defaulted'], autopct='
 st.sidebar.pyplot(fig)
 
 
-# Barchart test
-# ax, fig = plt.subplots(figsize=(5,5)) 
-# ax = sn.countplot(data=target)
-# ax.set_title('Credit allowance repartition')
-# st.sidebar.pyplot(fig)
-
-
-# Barchart test 2
-# st.sidebar.bar_chart(target)
-
-
-
 #******************************************
 # MAIN -- suite
 #******************************************
@@ -209,28 +191,7 @@ if st.checkbox("Enable (Disable) customer summary"):
    ax.axvline(int(infos_client["AMT_INCOME_TOTAL"].values[0]), color="green", linestyle='--')
    ax.set(title='Customer income', xlabel='Income ($US)', ylabel='')
    st.pyplot(fig)
-   
-   # Age vs Total income, interactive plot 
-   #data_at = data.reset_index(drop=False)
-   #data_at.DAYS_BIRTH = (data_at['DAYS_BIRTH']/365).round(1)
-   #fig, ax = plt.subplots(figsize=(9,9))
-   #fig = px.scatter(data_at, x='DAYS_BIRTH', y="AMT_INCOME_TOTAL", 
-                     #size="AMT_INCOME_TOTAL", color='CODE_GENDER',
-                     #hover_data=['NAME_FAMILY_STATUS', 'CNT_CHILDREN', 'NAME_CONTRACT_TYPE', 'SK_ID_CURR'])
-                     
-   #fig.update_layout({'plot_bgcolor':'#f0f0f0'}, 
-                          #title={'text':"Age vs Total income", 'x':0.5, 'xanchor': 'center'}, 
-                          #title_font=dict(size=15, family='Verdana'), legend=dict(y=1.1, orientation='h'))
-
-   #fig.update_traces(marker=dict(line=dict(width=0.5, color='#3a352a')), selector=dict(mode='markers'))
-   #fig.update_xaxes(showline=True, linewidth=2, linecolor='#f0f0f0', gridcolor='#cbcbcb',
-                    #title="Age", title_font=dict(size=18, family='Verdana'))
-   #fig.update_yaxes(showline=True, linewidth=2, linecolor='#f0f0f0', gridcolor='#cbcbcb',
-                    #title="Total income", title_font=dict(size=18, family='Verdana'))                 
-   
-   #st.pyplot(fig)  
-   # st.plotly_chart(fig)                
-
+	
 else:
   st.markdown("<i>…</i>", unsafe_allow_html=True)
 
@@ -277,11 +238,3 @@ if neighbors_nearest:
    
 else:
    st.markdown("<i>…</i>", unsafe_allow_html=True)    
-    
-
-    
-
-# <-- if __name__ == '__main__':
-    #main()
-    
-    
